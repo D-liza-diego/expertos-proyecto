@@ -1,11 +1,11 @@
-inicio(I,GD,GS,Riesgo,Social,Financiera,Resultado):-
+inicio(I,GS,GD,Riesgo,Social,Financiera,Resultado):-
     B=I-((GD*30)-GS),
     balance_c(B,Balance),
     rules(Riesgo,Social,Financiera,Balance,Resultado),
     write(Resultado).
 
 balance_c(B,Balance):- 
-    B<0,
+    B=<0,
     Balance="nulo",
     !.
 balance_c(B,Balance):-
@@ -346,4 +346,7 @@ rules(Riesgo,Social,Financiera,Balance,Resultado):-
 % RULES 34
 rules(Riesgo,Social,Financiera,Balance,Resultado):-
       Riesgo='alto',
+      Social="malas"|Social="buenas",
+      Financiera="malas"|Financiera="malas",
+      Balance="nulo"|Balance="bajo"|Balance="medio"|Balance="alto",
       Resultado='CREDITO DENEGADO',!.
